@@ -17,10 +17,15 @@ function checkGuess() {
 
     if (!guess || guess < 1 || guess > 100) {
         message.textContent = "⚠️ Entre un nombre valide entre 1 et 100.";
+        message.style.display = "block"; // même pour erreur
         return;
     }
 
     attempts++;
+
+    // Afficher les messages et score si cachés
+    message.style.display = "block";
+    attemptsDisplay.style.display = "block";
 
     const difference = Math.abs(secretNumber - guess);
 
@@ -43,8 +48,19 @@ function checkGuess() {
 
     if (difference === 0) {
         message.textContent = "🎉 INCROYABLE ! Tu as trouvé !";
-        document.body.classList.add("hot");
         checkBtn.disabled = true;
+
+        // Effet spécial victoire
+        message.classList.add("win");
+        document.body.classList.add("win");
+
+        // Champ de saisie clignotant
+        guessInput.style.border = "3px solid gold";
+        guessInput.style.boxShadow = "0 0 20px gold";
+
+        // On cache les boutons
+        guessInput.style.display = "none";
+        checkBtn.style.display = "none";
     }
     else if (difference <= 5) {
         message.textContent = "🔥 Brûlant !!";
@@ -88,6 +104,19 @@ function restartGame() {
     attemptsDisplay.textContent = "";
     guessInput.value = "";
     checkBtn.disabled = false;
+
+    // Supprimer les effets spéciaux
+    message.classList.remove("win");
+    document.body.classList.remove("win");
+    guessInput.style.border = "";
+    guessInput.style.boxShadow = "";
+
+    // 🔄 Rendre le champ et le bouton visibles à nouveau
+    guessInput.style.display = "inline-block";
+    checkBtn.style.display = "inline-block";
+
+    message.style.display = "none";
+    attemptsDisplay.style.display = "none";
 }
 
 // 🎯 LISTENERS
