@@ -1,11 +1,12 @@
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #4e73df, #1cc88a);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  transition: background 1s ease; /* transition fluide */
+  background-color: #4e73df; /* couleur de départ */
 }
 
 .game-container {
@@ -58,4 +59,16 @@ button:hover {
 
 .restart:hover {
   background-color: #c0392b;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.3s;
 }
