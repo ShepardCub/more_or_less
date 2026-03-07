@@ -4,11 +4,14 @@ const checkBtn = document.getElementById("checkBtn");
 const restartBtn = document.getElementById("restartBtn");
 const message = document.getElementById("message");
 const attemptsDisplay = document.getElementById("attempts");
+const scoreDisplay = document.getElementById("wins");
 
 // Variables du jeu
 let secretNumber = Math.floor(Math.random() * 100) + 1;
 let attempts = 0;
+let wins = Number(localStorage.getItem("wins")) || 0;
 
+scoreDisplay.textContent = "Score : " + wins;
 
 // Fonction pour vérifier la réponse
 function checkGuess() {
@@ -25,6 +28,7 @@ function checkGuess() {
     // Afficher les messages et score si cachés
     message.style.display = "block";
     attemptsDisplay.style.display = "block";
+    scoreDisplay.style.display = "block";
 
     const difference = Math.abs(secretNumber - guess);
 
@@ -60,6 +64,9 @@ function checkGuess() {
         // On cache les boutons
         guessInput.style.display = "none";
         checkBtn.style.display = "none";
+
+        wins++;
+        localStorage.setItem("wins", wins);
     }
     else if (difference <= 5) {
         message.textContent = "🔥 Brûlant !!";
@@ -90,6 +97,7 @@ function checkGuess() {
 
 
     attemptsDisplay.textContent = "Nombre d'essais : " + attempts;
+    scoreDisplay.textContent = "Score : " + wins;
 
     guessInput.value = "";
     guessInput.focus();

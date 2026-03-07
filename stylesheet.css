@@ -57,6 +57,10 @@ button:hover {
   display: none; /* caché au départ */
 }
 
+.score#wins {
+  display: block;
+}
+
 .restart {
   margin-top: 15px;
   background-color: #e74a3b;
