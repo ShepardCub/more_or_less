@@ -8,7 +8,7 @@
     <script src="./src/game.js" defer></script>
 
     <script src="script.js" defer></script>
-
+    <script src="./src/shop.js" defer></script>
 </head>
 
 <body>
@@ -25,6 +25,20 @@
         <div class="score" id="attempts"></div>
 
         <button class="restart" id="restartBtn">Recommencer</button>
+
+        <button id="shopBtn">🛒 Magasin</button>
+
+        <div id="shop" class="shop" style="display:none;">
+            <h2>Magasin</h2>
+
+            <button class="buy" data-item="direction">🌈 Direction (3)</button>
+            <button class="buy" data-item="gold">✨ Bordure dorée (5)</button>
+            <button class="buy" data-item="proximity">🌈 Proximity (3)</button>
+
+            
+
+            <button id="closeShop">Fermer</button>
+        </div>
     </div>
 
 </body>
