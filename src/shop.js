@@ -41,16 +41,16 @@ document.querySelectorAll(".buy").forEach(button => {
             applyEffects();
 
             // Feedback visuel au lieu d'alert
-            showToast("✅ Objet acheté !");
+            showToast(t("bought"));
         } else {
-            showToast("❌ Pas assez de victoires !");
+            showToast(t("notEnough"));
         }
     });
 });
 
 function markOwned(button, item) {
     button.disabled = true;
-    button.textContent = "✔ Acquis";
+    button.textContent = t("owned");
 
     const shopItem = document.getElementById("item-" + item);
     if (shopItem) shopItem.classList.add("owned");

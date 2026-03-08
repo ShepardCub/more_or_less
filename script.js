@@ -9,3 +9,8 @@ guessInput.addEventListener("keydown", function (event) {
     }
 });
 
+document.getElementById("langBtn").addEventListener("click", () => {
+    setLang(currentLang === "fr" ? "en" : "fr");
+});
+
+applyTranslations();

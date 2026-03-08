@@ -31,7 +31,7 @@ function checkGuess() {
     const guess = Number(guessInput.value);
 
     if (!guess || guess < 1 || guess > 100) {
-        message.textContent = "⚠️ Entre un nombre valide entre 1 et 100.";
+        message.textContent = t("invalid");
         message.style.display = "block"; // même pour erreur
         return;
     }
@@ -46,7 +46,7 @@ function checkGuess() {
     const difference = Math.abs(secretNumber - guess);
 
     if (difference === 0) {
-        message.textContent = "🎉 INCROYABLE ! Tu as trouvé !";
+        message.textContent = t("win");
         checkBtn.disabled = true;
 
         // Effet spécial victoire
@@ -86,8 +86,8 @@ function checkGuess() {
     }
 
 
-    attemptsDisplay.textContent = "Nombre d'essais : " + attempts;
-    scoreDisplay.textContent = "Score : " + wins;
+    attemptsDisplay.textContent = t("attempts") + attempts;
+    scoreDisplay.textContent = t("score") + wins;
 
     guessInput.value = "";
     guessInput.focus();
@@ -125,12 +125,12 @@ function showDirection(guess, secretNumber){
         if(inventory.direction){
             textDirection+="📉 ";
         }
-        textDirection += "Trop petit !";
+        textDirection += t("tooSmall");
     } else if (guess > secretNumber) {
         if(inventory.direction){
             textDirection+="📈 ";
         }
-        textDirection += "Trop grand !";
+        textDirection += t("tooBig");
     }
 
     message.textContent += textDirection;
@@ -138,15 +138,15 @@ function showDirection(guess, secretNumber){
 
 function showProximity(difference){
     if (difference <= 5) {
-        message.textContent = "🔥 Brûlant !!";
+        message.textContent = t("hot");
         document.body.classList.add("hot");
     }
     else if (difference <= 15) {
-        message.textContent = "🌡️ Tu chauffes...";
+        message.textContent = t("warm");
         document.body.classList.add("warm");
     }
     else {
-        message.textContent = "🧊 Très froid !";
+        message.textContent = t("tooCold");
         document.body.classList.add("cold");
     }
 

@@ -1,0 +1,96 @@
+const translations = {
+    fr: {
+        title: "🎯 Devine",
+        subtitle: "Choisis un nombre entre 1 et 100",
+        validate: "Valider",
+        restart: "↺ Recommencer",
+        shop: "🛒 Magasin",
+        shopTitle: "⚡ MAGASIN",
+        shopSubtitle: "Dépense tes victoires pour des pouvoirs",
+        close: "Fermer",
+        score: "Score : ",
+        attempts: "Nombre d'essais : ",
+        win: "🎉 INCROYABLE ! Tu as trouvé !",
+        invalid: "⚠️ Entre un nombre valide entre 1 et 100.",
+        tooCold: "🧊 Très froid !",
+        warm: "🌡️ Tu chauffes...",
+        hot: "🔥 Brûlant !!",
+        tooSmall: "Trop petit !",
+        tooBig: "Trop grand !",
+        bought: "✅ Objet acheté !",
+        notEnough: "❌ Pas assez de victoires !",
+        owned: "✔ Acquis",
+        items: {
+            direction:  { name: "Direction",     desc: "Affiche 📉 ou 📈 à chaque essai" },
+            proximity:  { name: "Proximité",     desc: "Indique si tu es chaud ou froid" },
+            gold:       { name: "Bordure dorée", desc: "Un style légendaire pour ton input" },
+            confetti:   { name: "Confettis",     desc: "Animation de victoire explosive" },
+        }
+    },
+    en: {
+        title: "🎯 Guess",
+        subtitle: "Pick a number between 1 and 100",
+        validate: "Validate",
+        restart: "↺ Restart",
+        shop: "🛒 Shop",
+        shopTitle: "⚡ SHOP",
+        shopSubtitle: "Spend your wins to unlock powers",
+        close: "Close",
+        score: "Score: ",
+        attempts: "Attempts: ",
+        win: "🎉 INCREDIBLE! You found it!",
+        invalid: "⚠️ Enter a valid number between 1 and 100.",
+        tooCold: "🧊 Ice cold!",
+        warm: "🌡️ Getting warmer...",
+        hot: "🔥 Burning hot!!",
+        tooSmall: "Too small!",
+        tooBig: "Too big!",
+        bought: "✅ Item purchased!",
+        notEnough: "❌ Not enough wins!",
+        owned: "✔ Owned",
+        items: {
+            direction:  { name: "Direction",    desc: "Shows 📉 or 📈 each guess" },
+            proximity:  { name: "Proximity",    desc: "Tells you if you're hot or cold" },
+            gold:       { name: "Golden border",desc: "A legendary style for your input" },
+            confetti:   { name: "Confetti",     desc: "Explosive victory animation" },
+        }
+    }
+};
+
+let currentLang = localStorage.getItem("lang")
+    || (navigator.language.startsWith("fr") ? "fr" : "en");
+
+function t(key) {
+    return translations[currentLang][key] || key;
+}
+
+function setLang(lang) {
+    currentLang = lang;
+    localStorage.setItem("lang", lang);
+    applyTranslations();
+}
+
+function applyTranslations() {
+    // Jeu
+    document.querySelector("h1").textContent               = t("title");
+    document.querySelector(".game-container > p").textContent = t("subtitle");
+    document.getElementById("checkBtn").textContent        = t("validate");
+    document.getElementById("restartBtn").textContent      = t("restart");
+    document.getElementById("shopBtn").textContent         = t("shop");
+
+    // Shop
+    document.querySelector(".shop-panel h2").textContent       = t("shopTitle");
+    document.querySelector(".shop-subtitle").textContent       = t("shopSubtitle");
+    document.getElementById("closeShop").textContent           = t("close");
+
+    // Items du shop
+    Object.keys(translations[currentLang].items).forEach(key => {
+        const el = document.getElementById("item-" + key);
+        if (!el) return;
+        el.querySelector(".item-name").textContent = t("items")[key].name;
+        el.querySelector(".item-desc").textContent = t("items")[key].desc;
+    });
+
+    // Bouton langue
+    document.getElementById("langBtn").textContent = currentLang === "fr" ? "🇬🇧 EN" : "🇫🇷 FR";
+}
