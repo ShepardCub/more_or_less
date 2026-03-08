@@ -105,7 +105,12 @@ function updateSkillCard() {
     const lvlBadge  = document.getElementById("skill-lvl");
     const rowConf   = document.getElementById("row-confetti");
     const dotConf   = document.getElementById("dot-confetti");
+    
     const priceConf = document.getElementById("price-confetti");
+    const priceStars = document.getElementById("price-stars");
+
+    const defConf = document.getElementById("conf-desc");
+
     const rowStars  = document.getElementById("row-stars");
     const dotStars  = document.getElementById("dot-stars");
     const starsDesc = document.getElementById("stars-desc");
@@ -125,7 +130,9 @@ function updateSkillCard() {
         rowConf.className     = "level-row done";
         dotConf.className     = "level-dot done";
         dotConf.textContent   = "✓";
+        
         priceConf.textContent = "";
+        priceStars.textContent = "";
 
         rowStars.className    = "level-row done";
         dotStars.className    = "level-dot done";
@@ -135,7 +142,8 @@ function updateSkillCard() {
         skillBuyBtn.textContent = fx.complete;
         skillBuyBtn.className   = "upgrade-btn done";
         skillBuyBtn.disabled    = true;
-        document.getElementById("conf-desc").textContent = "";
+
+        defConf.textContent = "";
 
     } else if (inventory.confetti) {
         icon.textContent      = "🎆";
@@ -155,7 +163,8 @@ function updateSkillCard() {
         skillBuyBtn.textContent = fx.upgradeNiv2;
         skillBuyBtn.className   = "upgrade-btn";
         skillBuyBtn.disabled    = false;
-        document.getElementById("conf-desc").textContent = "";
+
+        defConf.textContent = "";
 
     } else {
         icon.textContent      = "🎆";
@@ -175,7 +184,8 @@ function updateSkillCard() {
         skillBuyBtn.textContent = fx.buyNiv1;
         skillBuyBtn.className   = "upgrade-btn";
         skillBuyBtn.disabled    = false;
-        document.getElementById("conf-desc").textContent = fx.confettiDesc;
+        
+        defConf.textContent = fx.confettiDesc;
 
     }
 }

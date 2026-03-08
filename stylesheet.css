@@ -311,6 +311,12 @@ button:disabled {
   flex-direction: column;
 }
 
+.item-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
 .shop-item:hover:not(.owned) {
   border-color: var(--border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
