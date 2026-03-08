@@ -17,6 +17,7 @@ const prices = {
     direction: 3,
     gold: 5,
     proximity: 3,
+    confetti: 4
 };
 
 document.querySelectorAll(".buy").forEach(button => {
