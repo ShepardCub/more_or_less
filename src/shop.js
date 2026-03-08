@@ -2,14 +2,12 @@ shopBtn.addEventListener("click", () => {
     shop.style.display = "flex";
 });
 
-closeShop.addEventListener("click", () => {
-    shop.style.display = "none";
-});
+closeShop.addEventListener("click", closeShopPanel);
 
 // Fermer en cliquant sur l'overlay
 shop.addEventListener("click", (e) => {
     if (e.target === shop) {
-        shop.style.display = "none";
+        closeShopPanel();
     }
 });
 
@@ -169,6 +167,14 @@ function updateSkillCard() {
         skillBuyBtn.className   = "upgrade-btn";
         skillBuyBtn.disabled    = false;
     }
+}
+
+function closeShopPanel() {
+    shop.classList.add("closing");
+    setTimeout(() => {
+        shop.style.display = "none";
+        shop.classList.remove("closing");
+    }, 200);
 }
 
 skillBuyBtn.addEventListener("click", () => {

@@ -891,3 +891,24 @@ button::after {
     transform: none;
     box-shadow: none;
 }
+
+
+#shop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+#shop.closing {
+    animation: fadeOut 0.2s ease forwards;
+}
