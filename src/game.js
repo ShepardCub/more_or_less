@@ -70,9 +70,8 @@ function checkGuess() {
             showProximity(difference);
         }
 
-        if(inventory.direction){
-            showDirection(guess,secretNumber);
-        }
+        showDirection(guess,secretNumber);
+        
 
 
         guessInput.classList.add("shake");
@@ -115,11 +114,21 @@ function restartGame() {
 }
 
 function showDirection(guess, secretNumber){
+
+    var textDirection = "\n";
     if (guess < secretNumber) {
-        message.textContent += "\n📉 Trop petit !";
+        if(inventory.direction){
+            textDirection+="📉 ";
+        }
+        textDirection += "Trop petit !";
     } else if (guess > secretNumber) {
-        message.textContent += "\n📈 Trop grand !";
+        if(inventory.direction){
+            textDirection+="📈 ";
+        }
+        textDirection += "Trop grand !";
     }
+
+    message.textContent += textDirection;
 }
 
 function showProximity(difference){
