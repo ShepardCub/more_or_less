@@ -15,6 +15,12 @@ const hintBtn = document.getElementById("hintBtn");
 // Variables du jeu
 let secretNumber = Math.floor(Math.random() * 100) + 1;
 let attempts = 0;
+
+let confettiLoop = null;
+let starsLoop = null;
+let confettiInterval = null;
+
+
 let wins = Number(localStorage.getItem("wins")) || 0;
 const inventory = JSON.parse(localStorage.getItem("inventory")) || {};
 scoreDisplay.textContent = t("score") + wins;
@@ -97,6 +103,7 @@ function checkGuess() {
 
 // Fonction pour recommencer
 function restartGame() {
+    stopEffects();
     secretNumber = Math.floor(Math.random() * 100) + 1;
     attempts = 0;
     message.textContent = "";
@@ -189,45 +196,42 @@ function setDynamicBackgroundColor(difference){
 // Colle cette fonction dans game.js
 function launchConfetti() {
     const colors = ["#7c6aff", "#ff6a9b", "#f6c23e", "#1de98b", "#4e73df", "#ff4d6d"];
-    const count = 120;
 
-    for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-            const confetti = document.createElement("div");
-            const size = Math.random() * 10 + 6;
-            const isCircle = Math.random() > 0.5;
+    confettiInterval = setInterval(() => {
+        const confetti = document.createElement("div");
+        const size = Math.random() * 10 + 6;
+        const isCircle = Math.random() > 0.5;
 
-            confetti.style.cssText = `
-                position: fixed;
-                width: ${size}px;
-                height: ${size}px;
-                background: ${colors[Math.floor(Math.random() * colors.length)]};
-                border-radius: ${isCircle ? "50%" : "2px"};
-                left: ${Math.random() * 100}vw;
-                top: -20px;
-                z-index: 9999;
-                pointer-events: none;
-                opacity: 1;
-                transform: rotate(${Math.random() * 360}deg);
-            `;
+        confetti.style.cssText = `
+            position: fixed;
+            width: ${size}px;
+            height: ${size}px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            border-radius: ${isCircle ? "50%" : "2px"};
+            left: ${Math.random() * 100}vw;
+            top: -20px;
+            z-index: 9999;
+            pointer-events: none;
+            transform: rotate(${Math.random() * 360}deg);
+        `;
 
-            document.body.appendChild(confetti);
+        document.body.appendChild(confetti);
 
-            const duration = Math.random() * 2000 + 1500;
-            const xDrift = (Math.random() - 0.5) * 200;
+        const duration = Math.random() * 2000 + 1500;
+        const xDrift = (Math.random() - 0.5) * 200;
 
-            confetti.animate([
-                { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
-                { transform: `translate(${xDrift}px, 105vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
-            ], {
-                duration,
-                easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                fill: "forwards"
-            }).onfinish = () => confetti.remove();
+        confetti.animate([
+            { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+            { transform: `translate(${xDrift}px, 105vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+        ], {
+            duration,
+            easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            fill: "forwards"
+        }).onfinish = () => confetti.remove();
 
-        }, i * 20);
-    }
+    }, 30); // une particule toutes les 30ms = flux continu
 }
+
 
 function useHint() {
     if (!inventory.hint) return;
@@ -236,15 +240,15 @@ function useHint() {
 }
 
 function launchStars() {
-    const colors = ["#f6c23e", "#fff", "#fffbe6", "#ffe680", "#ffd700"];
     const count = 30;
+    const totalDuration = count * 40 + 1700;
 
     for (let i = 0; i < count; i++) {
         setTimeout(() => {
             const star = document.createElement("div");
             star.textContent = "⭐";
             const size = Math.random() * 24 + 16;
-            const startX = 30 + Math.random() * 40; // centré
+            const startX = 30 + Math.random() * 40;
             const angle = Math.random() * 360;
             const distance = Math.random() * 250 + 100;
             const dx = Math.cos(angle * Math.PI / 180) * distance;
@@ -275,4 +279,13 @@ function launchStars() {
 
         }, i * 40);
     }
+
+    starsLoop = setTimeout(launchStars, totalDuration);
+}
+
+function stopEffects() {
+    clearInterval(confettiInterval);
+    clearTimeout(starsLoop);
+    confettiInterval = null;
+    starsLoop = null;
 }
