@@ -16,7 +16,8 @@
 <body>
 
     <div class="game-container">
-        <button id="langBtn" style="position:absolute;top:14px;right:14px;padding:6px 10px;font-size:0.75rem;">🇬🇧 EN</button>
+        <button id="langBtn" style="position:absolute;top:14px;right:14px;padding:6px 10px;font-size:0.75rem;">🇬🇧
+            EN</button>
 
         <h1>🎯 Devine</h1>
         <p>Choisis un nombre entre 1 et 100</p>
@@ -25,10 +26,13 @@
         <button id="checkBtn">Valider</button>
 
         <div class="message" id="message"></div>
+        <button id="hintBtn" style="display:none;">💡 Pair ou impair ?</button>
+
         <div class="score" id="wins"></div>
         <div class="score" id="attempts"></div>
 
         <button class="restart" id="restartBtn">↺ Recommencer</button>
+
         <button id="shopBtn">🛒 Magasin</button>
     </div>
 
@@ -81,6 +85,17 @@
                     </div>
                     <div class="item-action">
                         <button class="buy" data-item="confetti">🏆 4</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="item-hint">
+                    <div class="item-icon">💡</div>
+                    <div class="item-info">
+                        <div class="item-name">Indice</div>
+                        <div class="item-desc">Révèle si le nombre est pair ou impair</div>
+                    </div>
+                    <div class="item-action">
+                        <button class="buy" data-item="hint">🏆 4</button>
                     </div>
                 </div>
 

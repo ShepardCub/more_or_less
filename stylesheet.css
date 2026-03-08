@@ -479,3 +479,32 @@ button::after {
 .shop-panel::before {
   pointer-events: none;
 }
+
+
+
+
+
+
+#hintBtn {
+    background: transparent;
+    border: 1.5px solid rgba(246, 194, 62, 0.4);
+    color: var(--gold);
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    margin-top: 10px;
+    opacity: 0.85;
+}
+
+#hintBtn:hover {
+    background: rgba(246, 194, 62, 0.1);
+    border-color: var(--gold);
+    box-shadow: 0 4px 14px rgba(246, 194, 62, 0.2);
+    opacity: 1;
+}
+
+#hintBtn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}

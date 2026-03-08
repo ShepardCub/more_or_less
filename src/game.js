@@ -8,6 +8,7 @@ const restartBtn = document.getElementById("restartBtn");
 const message = document.getElementById("message");
 const attemptsDisplay = document.getElementById("attempts");
 const scoreDisplay = document.getElementById("wins");
+const hintBtn = document.getElementById("hintBtn");
 
 
 
@@ -16,11 +17,9 @@ let secretNumber = Math.floor(Math.random() * 100) + 1;
 let attempts = 0;
 let wins = Number(localStorage.getItem("wins")) || 0;
 const inventory = JSON.parse(localStorage.getItem("inventory")) || {};
+let hintUsed = false;
 
-scoreDisplay.textContent = "Score : " + wins;
-
-
-    console.log(inventory);
+scoreDisplay.textContent = t("score") + wins;
 
 applyEffects();
 
@@ -116,6 +115,9 @@ function restartGame() {
 
     message.style.display = "none";
     attemptsDisplay.style.display = "none";
+
+    hintUsed = false;
+    hintBtn.disabled = false;
 }
 
 function showDirection(guess, secretNumber){
@@ -159,6 +161,9 @@ function applyEffects() {
     if (inventory.gold) {
         guessInput.style.border = "3px solid gold";
     }
+
+    hintBtn.style.display = inventory.hint ? "inline-block" : "none";
+
 
 }
 
@@ -221,4 +226,16 @@ function launchConfetti() {
 
         }, i * 20);
     }
+}
+
+function useHint() {
+    if (!inventory.hint) return;
+    if (hintUsed) {
+        showToast(t("hintUsed"));
+        return;
+    }
+    hintUsed = true;
+    const parity = secretNumber % 2 === 0 ? t("even") : t("odd");
+    showToast(t("hint") + parity);
+    hintBtn.disabled = true;
 }
