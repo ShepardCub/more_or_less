@@ -17,7 +17,6 @@ const prices = {
     direction: 3,
     gold: 5,
     proximity: 3,
-    confetti: 4,
     hint: 4,
 };
 
@@ -28,6 +27,8 @@ document.querySelectorAll(".buy").forEach(button => {
     if (inventory[item]) {
         markOwned(button, item);
     }
+
+
 
     button.addEventListener("click", () => {
         if (wins >= prices[item]) {
@@ -43,6 +44,7 @@ document.querySelectorAll(".buy").forEach(button => {
 
             // Feedback visuel au lieu d'alert
             showToast(t("bought"));
+
         } else {
             showToast(t("notEnough"));
         }
@@ -97,3 +99,107 @@ function showToast(msg) {
         setTimeout(() => toast.remove(), 300);
     }, 2200);
 }
+
+const skillBuyBtn = document.getElementById("skillbuy-btn");
+
+function updateSkillCard() {
+    const icon      = document.getElementById("skill-icon");
+    const lvlBadge  = document.getElementById("skill-lvl");
+    const rowConf   = document.getElementById("row-confetti");
+    const dotConf   = document.getElementById("dot-confetti");
+    const priceConf = document.getElementById("price-confetti");
+    const rowStars  = document.getElementById("row-stars");
+    const dotStars  = document.getElementById("dot-stars");
+    const starsDesc = document.getElementById("stars-desc");
+
+    if (inventory.stars) {
+        icon.textContent      = "⭐";
+        lvlBadge.className    = "card-lvl lvl3";
+        lvlBadge.textContent  = "NIV 2 / 2 ✓";
+
+        rowConf.className  = "level-row done";
+        dotConf.className  = "level-dot done";
+        dotConf.textContent = "✓";
+        priceConf.textContent = "";
+
+        rowStars.className  = "level-row done";
+        dotStars.className  = "level-dot done";
+        dotStars.textContent = "✓";
+        starsDesc.textContent = "Acquis";
+
+        skillBuyBtn.textContent = "✔ COLLECTION COMPLÈTE";
+        skillBuyBtn.className   = "upgrade-btn done";
+        skillBuyBtn.disabled    = true;
+
+    } else if (inventory.confetti) {
+        icon.textContent      = "🎆";
+        lvlBadge.className    = "card-lvl lvl1";
+        lvlBadge.textContent  = "NIV 1 / 2";
+
+        rowConf.className  = "level-row done";
+        dotConf.className  = "level-dot done";
+        dotConf.textContent = "✓";
+        priceConf.textContent = "";
+
+        rowStars.className  = "level-row current";
+        dotStars.className  = "level-dot current";
+        dotStars.textContent = "2";
+        starsDesc.textContent = "Disponible à l'achat";
+
+        skillBuyBtn.textContent = "⚡ UPGRADE NIV.2 — 🏆 6";
+        skillBuyBtn.className   = "upgrade-btn";
+        skillBuyBtn.disabled    = false;
+
+    } else {
+        icon.textContent      = "🎆";
+        lvlBadge.className    = "card-lvl lvl0";
+        lvlBadge.textContent  = "NIV 0 / 2";
+
+        rowConf.className  = "level-row current";
+        dotConf.className  = "level-dot current";
+        dotConf.textContent = "1";
+        priceConf.textContent = "🏆 4";
+
+        rowStars.className  = "level-row locked";
+        dotStars.className  = "level-dot locked";
+        dotStars.textContent = "2";
+        starsDesc.textContent = "Verrouillé";
+
+        skillBuyBtn.textContent = "⚡ ACHETER NIV.1 — 🏆 4";
+        skillBuyBtn.className   = "upgrade-btn";
+        skillBuyBtn.disabled    = false;
+    }
+}
+
+skillBuyBtn.addEventListener("click", () => {
+    if (!inventory.confetti) {
+        if (wins >= 4) {
+            wins -= 4;
+            inventory.confetti = true;
+            localStorage.setItem("wins", wins);
+            localStorage.setItem("inventory", JSON.stringify(inventory));
+            scoreDisplay.textContent = t("score") + wins;
+            updateSkillCard();
+            showToast(t("bought"));
+        } else {
+            showToast(t("notEnough"));
+        }
+    } else if (!inventory.stars) {
+        if (wins >= 6) {
+            wins -= 6;
+            inventory.stars = true;
+            localStorage.setItem("wins", wins);
+            localStorage.setItem("inventory", JSON.stringify(inventory));
+            scoreDisplay.textContent = t("score") + wins;
+            updateSkillCard();
+            showToast(t("bought"));
+        } else {
+            showToast(t("notEnough"));
+        }
+    }
+});
+
+
+
+// Init au chargement
+updateSkillCard();

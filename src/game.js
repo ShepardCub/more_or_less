@@ -65,6 +65,11 @@ function checkGuess() {
             launchConfetti();
         }
 
+        if (inventory.stars){
+            launchStars();
+        }
+        
+
     }
 
     else{
@@ -228,4 +233,46 @@ function useHint() {
     if (!inventory.hint) return;
     const parity = secretNumber % 2 === 0 ? t("even") : t("odd");
     showToast(t("hint") + parity);
+}
+
+function launchStars() {
+    const colors = ["#f6c23e", "#fff", "#fffbe6", "#ffe680", "#ffd700"];
+    const count = 30;
+
+    for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+            const star = document.createElement("div");
+            star.textContent = "⭐";
+            const size = Math.random() * 24 + 16;
+            const startX = 30 + Math.random() * 40; // centré
+            const angle = Math.random() * 360;
+            const distance = Math.random() * 250 + 100;
+            const dx = Math.cos(angle * Math.PI / 180) * distance;
+            const dy = Math.sin(angle * Math.PI / 180) * distance;
+
+            star.style.cssText = `
+                position: fixed;
+                font-size: ${size}px;
+                left: ${startX}vw;
+                top: 50%;
+                z-index: 9999;
+                pointer-events: none;
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            `;
+
+            document.body.appendChild(star);
+
+            star.animate([
+                { transform: `translate(-50%, -50%) scale(0)`, opacity: 0 },
+                { transform: `translate(-50%, -50%) scale(1.4)`, opacity: 1, offset: 0.2 },
+                { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.5)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 800 + 900,
+                easing: "cubic-bezier(0.2, 0.8, 0.4, 1)",
+                fill: "forwards"
+            }).onfinish = () => star.remove();
+
+        }, i * 40);
+    }
 }
