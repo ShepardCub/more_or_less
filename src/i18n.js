@@ -23,7 +23,6 @@ const translations = {
         hint: "Le nombre est ",
         even: "pair",
         odd: "impair",
-        hintUsed: "Indice déjà utilisé !",
         items: {
             direction:  { name: "Direction",     desc: "Affiche 📉 ou 📈 à chaque essai" },
             proximity:  { name: "Proximité",     desc: "Indique si tu es chaud ou froid" },
@@ -56,7 +55,6 @@ const translations = {
         hint: "The number is ",
         even: "even",
         odd: "odd",
-        hintUsed: "Hint already used!",
         items: {
             direction:  { name: "Direction",    desc: "Shows 📉 or 📈 each guess" },
             proximity:  { name: "Proximity",    desc: "Tells you if you're hot or cold" },
