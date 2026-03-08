@@ -19,6 +19,7 @@ let attempts = 0;
 let confettiLoop = null;
 let starsLoop = null;
 let confettiInterval = null;
+let starsInterval = null;
 
 
 let wins = Number(localStorage.getItem("wins")) || 0;
@@ -240,52 +241,44 @@ function useHint() {
 }
 
 function launchStars() {
-    const count = 30;
-    const totalDuration = count * 40 + 1700;
+    starsInterval = setInterval(() => {
+        const star = document.createElement("div");
+        star.textContent = "⭐";
+        const size = Math.random() * 24 + 16;
+        const startX = 30 + Math.random() * 40;
+        const angle = Math.random() * 360;
+        const distance = Math.random() * 250 + 100;
+        const dx = Math.cos(angle * Math.PI / 180) * distance;
+        const dy = Math.sin(angle * Math.PI / 180) * distance;
 
-    for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-            const star = document.createElement("div");
-            star.textContent = "⭐";
-            const size = Math.random() * 24 + 16;
-            const startX = 30 + Math.random() * 40;
-            const angle = Math.random() * 360;
-            const distance = Math.random() * 250 + 100;
-            const dx = Math.cos(angle * Math.PI / 180) * distance;
-            const dy = Math.sin(angle * Math.PI / 180) * distance;
+        star.style.cssText = `
+            position: fixed;
+            font-size: ${size}px;
+            left: ${startX}vw;
+            top: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        `;
 
-            star.style.cssText = `
-                position: fixed;
-                font-size: ${size}px;
-                left: ${startX}vw;
-                top: 50%;
-                z-index: 9999;
-                pointer-events: none;
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            `;
+        document.body.appendChild(star);
 
-            document.body.appendChild(star);
+        star.animate([
+            { transform: `translate(-50%, -50%) scale(0)`, opacity: 0 },
+            { transform: `translate(-50%, -50%) scale(1.4)`, opacity: 1, offset: 0.2 },
+            { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.5)`, opacity: 0 }
+        ], {
+            duration: Math.random() * 800 + 900,
+            easing: "cubic-bezier(0.2, 0.8, 0.4, 1)",
+            fill: "forwards"
+        }).onfinish = () => star.remove();
 
-            star.animate([
-                { transform: `translate(-50%, -50%) scale(0)`, opacity: 0 },
-                { transform: `translate(-50%, -50%) scale(1.4)`, opacity: 1, offset: 0.2 },
-                { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.5)`, opacity: 0 }
-            ], {
-                duration: Math.random() * 800 + 900,
-                easing: "cubic-bezier(0.2, 0.8, 0.4, 1)",
-                fill: "forwards"
-            }).onfinish = () => star.remove();
-
-        }, i * 40);
-    }
-
-    starsLoop = setTimeout(launchStars, totalDuration);
+    }, 80); // moins dense que les confettis
 }
 
 function stopEffects() {
     clearInterval(confettiInterval);
-    clearTimeout(starsLoop);
+    clearInterval(starsInterval);
     confettiInterval = null;
-    starsLoop = null;
+    starsInterval = null;
 }
