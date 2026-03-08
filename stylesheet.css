@@ -234,10 +234,19 @@ button:disabled {
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 32px 28px;
-  width: 340px;
+  width: 90vw;
   position: relative;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), var(--glow);
   animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin: auto;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  max-width: 700px; /* ← plus large */
+}
+
+.shop-panel::-webkit-scrollbar {
+    display: none; /* Chrome / Safari */
 }
 
 @keyframes slideUp {
@@ -284,8 +293,8 @@ button:disabled {
 
 /* ── SHOP ITEMS ── */
 .shop-items {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -902,6 +911,8 @@ button::after {
     align-items: center;
     justify-content: center;
     z-index: 100;
+    overflow-y: auto;
+    padding: 20px;
 }
 
 @keyframes fadeOut {
