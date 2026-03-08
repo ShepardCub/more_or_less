@@ -6,7 +6,6 @@
     <title>Devine le Nombre</title>
     <link rel="stylesheet" href="stylesheet.css">
     <script src="./src/game.js" defer></script>
-
     <script src="script.js" defer></script>
     <script src="./src/shop.js" defer></script>
 </head>
@@ -14,28 +13,62 @@
 <body>
 
     <div class="game-container">
-        <h1>🎯 Devine le nombre</h1>
+        <h1>🎯 Devine</h1>
         <p>Choisis un nombre entre 1 et 100</p>
 
-        <input type="number" id="guessInput" min="1" max="100">
+        <input type="number" id="guessInput" min="1" max="100" placeholder="?">
         <button id="checkBtn">Valider</button>
 
         <div class="message" id="message"></div>
         <div class="score" id="wins"></div>
         <div class="score" id="attempts"></div>
 
-        <button class="restart" id="restartBtn">Recommencer</button>
-
+        <button class="restart" id="restartBtn">↺ Recommencer</button>
         <button id="shopBtn">🛒 Magasin</button>
+    </div>
 
-        <div id="shop" class="shop" style="display:none;">
-            <h2>Magasin</h2>
+    <!-- SHOP OVERLAY -->
+    <div id="shop" style="display:none;">
+        <div class="shop-panel">
+            <h2>⚡ MAGASIN</h2>
+            <p class="shop-subtitle">Dépense tes victoires pour des pouvoirs</p>
 
-            <button class="buy" data-item="direction">🌈 Direction (3)</button>
-            <button class="buy" data-item="gold">✨ Bordure dorée (5)</button>
-            <button class="buy" data-item="proximity">🌈 Proximity (3)</button>
+            <div class="shop-items">
 
-            
+                <div class="shop-item" id="item-direction">
+                    <div class="item-icon">🧭</div>
+                    <div class="item-info">
+                        <div class="item-name">Direction</div>
+                        <div class="item-desc">Affiche 📉 ou 📈 à chaque essai</div>
+                    </div>
+                    <div class="item-action">
+                        <button class="buy" data-item="direction">🏆 3</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="item-proximity">
+                    <div class="item-icon">🌡️</div>
+                    <div class="item-info">
+                        <div class="item-name">Proximité</div>
+                        <div class="item-desc">Indique si tu es chaud ou froid</div>
+                    </div>
+                    <div class="item-action">
+                        <button class="buy" data-item="proximity">🏆 3</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="item-gold">
+                    <div class="item-icon">✨</div>
+                    <div class="item-info">
+                        <div class="item-name">Bordure dorée</div>
+                        <div class="item-desc">Un style légendaire pour ton input</div>
+                    </div>
+                    <div class="item-action">
+                        <button class="buy" data-item="gold">🏆 5</button>
+                    </div>
+                </div>
+
+            </div>
 
             <button id="closeShop">Fermer</button>
         </div>

@@ -100,7 +100,7 @@ function restartGame() {
     // Supprimer les effets spéciaux
     message.classList.remove("win");
     document.body.classList.remove("win");
-    document.body.style.backgroundColor = "#888888";
+    document.body.style.backgroundColor = "var(--bg-dark)";
 
     guessInput.style.border = "";
     guessInput.style.boxShadow = "";
