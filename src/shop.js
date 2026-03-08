@@ -109,63 +109,74 @@ function updateSkillCard() {
     const rowStars  = document.getElementById("row-stars");
     const dotStars  = document.getElementById("dot-stars");
     const starsDesc = document.getElementById("stars-desc");
+    const fx        = t("items").victoryFx;
+
+    document.getElementById("skill-title").textContent = fx.title;
+
+    // Mettre à jour les noms (en gardant le span enfant intact)
+    document.getElementById("text-confetti").childNodes[0].nodeValue = fx.confettiName + " ";
+    document.getElementById("text-stars").childNodes[0].nodeValue = fx.starsName + " ";
 
     if (inventory.stars) {
         icon.textContent      = "⭐";
         lvlBadge.className    = "card-lvl lvl3";
-        lvlBadge.textContent  = "NIV 2 / 2 ✓";
-
-        rowConf.className  = "level-row done";
-        dotConf.className  = "level-dot done";
-        dotConf.textContent = "✓";
+        lvlBadge.textContent  = fx.cardLvl2;
+        
+        rowConf.className     = "level-row done";
+        dotConf.className     = "level-dot done";
+        dotConf.textContent   = "✓";
         priceConf.textContent = "";
 
-        rowStars.className  = "level-row done";
-        dotStars.className  = "level-dot done";
-        dotStars.textContent = "✓";
-        starsDesc.textContent = "Acquis";
+        rowStars.className    = "level-row done";
+        dotStars.className    = "level-dot done";
+        dotStars.textContent  = "✓";
+        starsDesc.textContent = fx.starsOwned;
 
-        skillBuyBtn.textContent = "✔ COLLECTION COMPLÈTE";
+        skillBuyBtn.textContent = fx.complete;
         skillBuyBtn.className   = "upgrade-btn done";
         skillBuyBtn.disabled    = true;
+        document.getElementById("conf-desc").textContent = "";
 
     } else if (inventory.confetti) {
         icon.textContent      = "🎆";
         lvlBadge.className    = "card-lvl lvl1";
-        lvlBadge.textContent  = "NIV 1 / 2";
+        lvlBadge.textContent  = fx.cardLvl1;
 
-        rowConf.className  = "level-row done";
-        dotConf.className  = "level-dot done";
-        dotConf.textContent = "✓";
+        rowConf.className     = "level-row done";
+        dotConf.className     = "level-dot done";
+        dotConf.textContent   = "✓";
         priceConf.textContent = "";
 
-        rowStars.className  = "level-row current";
-        dotStars.className  = "level-dot current";
-        dotStars.textContent = "2";
-        starsDesc.textContent = "Disponible à l'achat";
+        rowStars.className    = "level-row current";
+        dotStars.className    = "level-dot current";
+        dotStars.textContent  = "2";
+        starsDesc.textContent = fx.starsAvailable;
 
-        skillBuyBtn.textContent = "⚡ UPGRADE NIV.2 — 🏆 6";
+        skillBuyBtn.textContent = fx.upgradeNiv2;
         skillBuyBtn.className   = "upgrade-btn";
         skillBuyBtn.disabled    = false;
+        document.getElementById("conf-desc").textContent = "";
 
     } else {
         icon.textContent      = "🎆";
         lvlBadge.className    = "card-lvl lvl0";
-        lvlBadge.textContent  = "NIV 0 / 2";
+        lvlBadge.textContent  = fx.cardLvl0;
 
-        rowConf.className  = "level-row current";
-        dotConf.className  = "level-dot current";
-        dotConf.textContent = "1";
+        rowConf.className     = "level-row current";
+        dotConf.className     = "level-dot current";
+        dotConf.textContent   = "1";
         priceConf.textContent = "🏆 4";
 
-        rowStars.className  = "level-row locked";
-        dotStars.className  = "level-dot locked";
-        dotStars.textContent = "2";
-        starsDesc.textContent = "Verrouillé";
+        rowStars.className    = "level-row locked";
+        dotStars.className    = "level-dot locked";
+        dotStars.textContent  = "2";
+        starsDesc.textContent = fx.starsLocked;
 
-        skillBuyBtn.textContent = "⚡ ACHETER NIV.1 — 🏆 4";
+        skillBuyBtn.textContent = fx.buyNiv1;
         skillBuyBtn.className   = "upgrade-btn";
         skillBuyBtn.disabled    = false;
+        document.getElementById("conf-desc").textContent = fx.confettiDesc;
+
     }
 }
 

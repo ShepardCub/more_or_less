@@ -301,13 +301,14 @@ button:disabled {
 
 .shop-item {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  align-items: flex-start;
+  gap: 10px;
   background: var(--bg-card2);
   border: 1.5px solid rgba(255, 255, 255, 0.05);
   border-radius: 14px;
   padding: 14px 16px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  flex-direction: column;
 }
 
 .shop-item:hover:not(.owned) {
@@ -347,6 +348,7 @@ button:disabled {
 
 .item-action {
   flex-shrink: 0;
+  width: 100%;
 }
 
 .buy {
@@ -361,7 +363,10 @@ button:disabled {
   border: 1.5px solid var(--accent);
   color: var(--accent);
   transition: all 0.2s;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
+  width: 80%;
 }
 
 .buy:hover:not(:disabled) {

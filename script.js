@@ -14,4 +14,6 @@ document.getElementById("langBtn").addEventListener("click", () => {
     setLang(currentLang === "fr" ? "en" : "fr");
 });
 
-applyTranslations();
+document.addEventListener("DOMContentLoaded", () => {
+    applyTranslations();
+});
