@@ -934,3 +934,26 @@ button::after {
 #shop.closing {
     animation: fadeOut 0.2s ease forwards;
 }
+
+
+
+
+
+
+
+
+.bg-bear {
+    position: fixed;
+    top: 0;
+    left: -200px;
+    width: 120px;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+    animation: bearWalk linear infinite;
+}
+
+@keyframes bearWalk {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(100vw + 200px)); }
+}

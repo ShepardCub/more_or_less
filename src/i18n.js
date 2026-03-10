@@ -31,6 +31,7 @@ const translations = {
             proximity: { name: "Proximité", desc: "Indique si tu es chaud ou froid" },
             gold: { name: "Bordure dorée", desc: "Un style légendaire pour ton input" },
             confetti: { name: "Confettis", desc: "Animation de victoire explosive" },
+            bears: { name: "Ours en fond", desc: "Des ours traversent l'écran" },
             hint: { name: "Indice", desc: "Révèle si le nombre est pair ou impair" },
             victoryFx: {
                 name: "Effets victoire", cardLvl0: "NIV 0 / 2", cardLvl1: "NIV 1 / 2", cardLvl2: "NIV 2 / 2 ✓",
@@ -71,6 +72,7 @@ const translations = {
         items: {
             direction: { name: "Direction", desc: "Shows 📉 or 📈 each guess" },
             proximity: { name: "Proximity", desc: "Tells you if you're hot or cold" },
+            bears: { name: "Bears background", desc: "Bears walk across the screen" },
             gold: { name: "Golden border", desc: "A legendary style for your input" },
             confetti: { name: "Confetti", desc: "Explosive victory animation" },
             hint: { name: "Hint", desc: "Reveals if the number is even or odd" },

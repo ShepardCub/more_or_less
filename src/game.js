@@ -29,7 +29,6 @@ scoreDisplay.textContent = t("score") + wins;
 applyEffects();
 
 
-
 // Fonction pour vérifier la réponse
 function checkGuess() {
     const guess = Number(guessInput.value);
@@ -171,6 +170,13 @@ function applyEffects() {
         guessInput.style.border = "3px solid gold";
     }
 
+    if (inventory.bears) {
+        // évite de spawner en double si déjà présents
+        if (!document.querySelector(".bg-bear")){
+            spawnBears();
+        }
+    }
+
     hintBtn.style.display = inventory.hint ? "inline-block" : "none";
 
 
@@ -282,3 +288,5 @@ function stopEffects() {
     confettiInterval = null;
     starsInterval = null;
 }
+
+

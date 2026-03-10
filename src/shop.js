@@ -16,6 +16,7 @@ const prices = {
     gold: 5,
     proximity: 3,
     hint: 4,
+    bears: 5,
 };
 
 document.querySelectorAll(".buy").forEach(button => {

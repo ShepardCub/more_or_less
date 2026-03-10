@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Devine le Nombre</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <script src="./src/bear.js" defer></script>
 
     <script src="./src/i18n.js" defer></script>
     <script src="./src/game.js" defer></script>
@@ -14,6 +15,7 @@
 </head>
 
 <body>
+
 
     <div class="game-container">
         <button id="langBtn" style="position:absolute;top:14px;right:14px;padding:6px 10px;font-size:0.75rem;">🇬🇧
@@ -85,6 +87,19 @@
 
                     <div class="item-action">
                         <button class="buy" data-item="gold">🏆 5</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" id="item-bears">
+                    <div class="item-top">
+                        <div class="item-icon">🐻</div>
+                        <div class="item-info">
+                            <div class="item-name">Ours en fond</div>
+                            <div class="item-desc">Des ours traversent l'écran</div>
+                        </div>
+                    </div>
+                    <div class="item-action">
+                        <button class="buy" data-item="bears">🏆 5</button>
                     </div>
                 </div>
 
